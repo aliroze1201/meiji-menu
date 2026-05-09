@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEIJI — Sushi & Grill</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Noto+Serif+JP:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0F0508;
+  --bg-dark: #1A0A10;
+  --bg-card: #1F0D14;
+  --bg-card-hover: #2A1420;
+  --burgundy: #4A1A2A;
+  --burgundy-light: #6B2840;
+  --gold: #C8A87C;
+  --gold-light: #E2CBA0;
+  --gold-dim: #8B7355;
+  --cream: #F5E6D0;
+  --text: #E8D5C4;
+  --text-dim: #9A8576;
+  --cherry: #C44569;
+  --cherry-dark: #8B2040;
+  --white: #FFF8F0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--burgundy) var(--bg-deep);
+}
+
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 30% 20%, #2D111B 0%, var(--bg-deep) 70%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(196, 69, 105, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(200, 168, 124, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Cherry blossom SVG background */
+.cherry-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.cherry-branch {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  opacity: 0.15;
+}
+
+.cherry-branch.top-right {
+  top: -30px; right: -30px;
+  animation: sway 12s ease-in-out infinite;
+}
+
+.cherry-branch.bottom-left {
+  bottom: -30px; left: -30px;
+  transform: rotate(180deg);
+  animation: sway 15s ease-in-out infinite reverse;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  animation: fadeUp 1.5s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-infinity {
+  width: 80px;
+  height: 40px;
+  margin: 0 auto 20px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 0.3s forwards;
+}
+
+.logo-infinity svg { width: 100%; height: 100%; }
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 0.5s forwards;
+}
+
+.hero .subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2vw, 1.3rem);
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  text-transform: lowercase;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 0.7s forwards;
+}
+
+.hero .tagline {
+  margin-top: 40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  color: var(--text-dim);
+  max-width: 500px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 0.9s forwards;
+}
+
+.hero .divider-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  margin: 25px auto;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 0.8s forwards;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease-out 1.2s forwards;
+}
+
+.scroll-hint span {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid var(--gold-dim);
+  border-bottom: 1px solid var(--gold-dim);
+  transform: rotate(45deg);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+
+/* Floating petals */
+.petal {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(196, 69, 105, 0.3), transparent);
+  border-radius: 50% 0 50% 0;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.petal:nth-child(1) { left: 10%; animation: fall 15s linear infinite; animation-delay: 0s; width: 6px; height: 6px; }
+.petal:nth-child(2) { left: 25%; animation: fall 18s linear infinite; animation-delay: 3s; width: 10px; height: 10px; }
+.petal:nth-child(3) { left: 50%; animation: fall 20s linear infinite; animation-delay: 5s; }
+.petal:nth-child(4) { left: 70%; animation: fall 16s linear infinite; animation-delay: 8s; width: 5px; height: 5px; }
+.petal:nth-child(5) { left: 85%; animation: fall 22s linear infinite; animation-delay: 2s; width: 7px; height: 7px; }
+.petal:nth-child(6) { left: 40%; animation: fall 19s linear infinite; animation-delay: 10s; }
+.petal:nth-child(7) { left: 60%; animation: fall 17s linear infinite; animation-delay: 7s; width: 9px; height: 9px; }
+.petal:nth-child(8) { left: 15%; animation: fall 21s linear infinite; animation-delay: 4s; width: 6px; height: 6px; }
+
+/* ─── NAVIGATION ─── */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 5, 8, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200, 168, 124, 0.1);
+  padding: 0;
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 20px;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  white-space: nowrap;
+  padding: 15px 25px 15px 0;
+  border-right: 1px solid rgba(200, 168, 124, 0.15);
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 18px 18px;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 60%;
+}
+
+/* ─── MAIN CONTENT ─── */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px 100px;
+}
+
+.section {
+  padding: 80px 0 40px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: rgba(200, 168, 124, 0.08);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.section-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 20px auto 0;
+}
+
+/* ─── MENU GRID ─── */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 700px) {
+  .menu-grid { grid-template-columns: 1fr; gap: 16px; }
+  main { padding: 0 16px 80px; }
+  .section { padding: 60px 0 20px; }
+}
+
+/* ─── MENU CARD ─── */
+.menu-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 168, 124, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.menu-card:hover {
+  border-color: rgba(200, 168, 124, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(200, 168, 124, 0.03);
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: brightness(0.85) contrast(1.05) saturate(1.1);
+}
+
+.menu-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.card-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(transparent, var(--bg-card));
+  pointer-events: none;
+}
+
+/* Photo placeholder with gradient art */
+.card-photo {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  transition: transform 0.6s ease;
+}
+
+.menu-card:hover .card-photo::before {
+  transform: scale(1.08);
+}
+
+.card-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(transparent, var(--bg-card));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Food photo gradient themes */
+.photo-sushi::before { background: linear-gradient(135deg, #2D1118 0%, #4A1520 30%, #C44569 60%, #E8835A 100%); }
+.photo-salmon::before { background: linear-gradient(135deg, #1A0A10 0%, #8B3A25 40%, #E8835A 70%, #F0A868 100%); }
+.photo-shrimp::before { background: linear-gradient(135deg, #1F0D14 0%, #C4734A 40%, #E8A870 70%, #F5D0A0 100%); }
+.photo-ramen::before { background: linear-gradient(135deg, #0F0508 0%, #3D1A0A 30%, #8B5A30 60%, #C8A060 100%); }
+.photo-grill::before { background: linear-gradient(135deg, #1A0505 0%, #4A1A0A 30%, #8B3A15 60%, #C86A30 100%); }
+.photo-salad::before { background: linear-gradient(135deg, #0A1A0A 0%, #1A4A1A 30%, #3A8A3A 60%, #6ACA4A 100%); }
+.photo-dessert::before { background: linear-gradient(135deg, #1A0A05 0%, #4A2A15 30%, #8B5A30 60%, #D4A060 100%); }
+.photo-tartare::before { background: linear-gradient(135deg, #1A0508 0%, #6B2020 30%, #C44540 60%, #E89080 100%); }
+.photo-veggie::before { background: linear-gradient(135deg, #0A150A 0%, #1A3A1A 30%, #3A6A2A 60%, #7ABA50 100%); }
+.photo-crispy::before { background: linear-gradient(135deg, #1A0D05 0%, #5A3A15 30%, #A07030 60%, #D4A868 100%); }
+.photo-special::before { background: linear-gradient(135deg, #1A0510 0%, #4A1A30 30%, #8B3A5A 50%, #C86A4A 70%, #E8A868 100%); }
+.photo-soup::before { background: linear-gradient(135deg, #0F0A05 0%, #2A1A0A 30%, #5A3A15 60%, #8B6A40 100%); }
+.photo-yakitori::before { background: linear-gradient(135deg, #1A0808 0%, #5A2A15 40%, #A05030 70%, #D88050 100%); }
+.photo-maki::before { background: linear-gradient(135deg, #050A08 0%, #0A2A1A 30%, #1A4A2A 50%, #E8835A 80%, #F0A050 100%); }
+
+/* Photo food icon overlay */
+.card-photo .food-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  opacity: 0.25;
+  z-index: 1;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+  transition: opacity 0.3s ease;
+}
+
+.menu-card:hover .food-icon { opacity: 0.35; }
+
+.card-body {
+  padding: 20px 24px 24px;
+}
+
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.card-price .currency {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--gold-dim);
+  margin-left: 3px;
+}
+
+.card-desc {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.card-tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 3px 12px;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(200, 168, 124, 0.15);
+  color: var(--gold-dim);
+  border-radius: 2px;
+}
+
+/* ─── SPECIALS / FEATURED ─── */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 800px) {
+  .featured-grid { grid-template-columns: 1fr; }
+}
+
+.featured-card {
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(74, 26, 42, 0.15) 100%);
+  border: 1px solid rgba(200, 168, 124, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.featured-card:hover {
+  border-color: rgba(200, 168, 124, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 60px rgba(200, 168, 124, 0.04);
+}
+
+.featured-card .card-photo { height: 240px; }
+
+.featured-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  padding: 4px 14px;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(200, 168, 124, 0.15);
+  border: 1px solid rgba(200, 168, 124, 0.3);
+  color: var(--gold-light);
+  backdrop-filter: blur(10px);
+  border-radius: 2px;
+}
+
+/* ─── INTRO SECTION ─── */
+.intro {
+  text-align: center;
+  padding: 100px 20px 60px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.intro p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 2;
+  color: var(--text-dim);
+}
+
+.intro .gold { color: var(--gold-dim); }
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(200, 168, 124, 0.08);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+footer .foot-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+footer .foot-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  margin-bottom: 30px;
+}
+
+footer p {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+footer .foot-note {
+  margin-top: 30px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* ─── ANIMATIONS ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── QUANTITY TAG ─── */
+.qty-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--cherry);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+
+  <svg class="cherry-branch top-right" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M300 0 Q250 80 200 100 Q160 110 140 90 Q120 70 100 100 Q70 140 50 200 Q40 240 60 280" stroke="rgba(200,168,124,0.15)" stroke-width="1.5" fill="none"/>
+    <circle cx="200" cy="100" r="8" fill="rgba(196,69,105,0.1)"/><circle cx="140" cy="88" r="6" fill="rgba(196,69,105,0.08)"/>
+    <circle cx="100" cy="100" r="7" fill="rgba(196,69,105,0.1)"/><circle cx="60" cy="270" r="5" fill="rgba(196,69,105,0.06)"/>
+    <circle cx="250" cy="50" r="5" fill="rgba(196,69,105,0.08)"/><circle cx="170" cy="95" r="4" fill="rgba(196,69,105,0.06)"/>
+  </svg>
+
+  <svg class="cherry-branch bottom-left" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M300 0 Q240 60 200 80 Q170 90 150 70 Q130 50 100 80 Q80 100 60 160" stroke="rgba(200,168,124,0.12)" stroke-width="1" fill="none"/>
+    <circle cx="200" cy="80" r="6" fill="rgba(196,69,105,0.08)"/><circle cx="150" cy="68" r="5" fill="rgba(196,69,105,0.06)"/>
+    <circle cx="100" cy="78" r="6" fill="rgba(196,69,105,0.08)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="logo-infinity">
+      <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 20 C20 10, 30 5, 40 20 C50 35, 60 30, 60 20 C60 10, 50 5, 40 20 C30 35, 20 30, 20 20Z" fill="none" stroke="#C8A87C" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <h1>MEIJI</h1>
+    <div class="subtitle">— sushi & grill —</div>
+    <div class="divider-line"></div>
+    <p class="tagline">
+      Votre cuisine japonaise fusion.<br>
+      Dégustez l'art culinaire nippon dans toute sa splendeur.
+    </p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Découvrir le menu</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav-bar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">MEIJI</div>
+    <a href="#starters" class="nav-link">Starters</a>
+    <a href="#salades" class="nav-link">Salades & Pokés</a>
+    <a href="#tartares" class="nav-link">Tartares</a>
+    <a href="#sashimi" class="nav-link">Sashimi</a>
+    <a href="#soupes" class="nav-link">Soupes</a>
+    <a href="#nigiri" class="nav-link">Nigiri</a>
+    <a href="#maki" class="nav-link">Maki</a>
+    <a href="#california" class="nav-link">California</a>
+    <a href="#spring" class="nav-link">Spring Rolls</a>
+    <a href="#crispy" class="nav-link">Crispy</a>
+    <a href="#originaux" class="nav-link">Originaux</a>
+    <a href="#speciaux" class="nav-link">Spéciaux</a>
+    <a href="#plats" class="nav-link">Plats Chauds</a>
+    <a href="#desserts" class="nav-link">Desserts</a>
+  </div>
+</nav>
+
+<!-- ═══ INTRO ═══ -->
+<div class="intro fade-in">
+  <p>
+    Les sushis sont les premiers délices du palais. <span class="gold">Toute une variété de petits plats</span> préparés à base de poisson frais, fruits de mer et parfois même de légumes. Le goût naturel du poisson complète, à la perfection, le riz délicatement vinaigré.
+  </p>
+</div>
+
+<main>
+
+<!-- ═══════════════ STARTERS ═══════════════ -->
+<section class="section fade-in" id="starters">
+  <div class="section-header">
+    <div class="section-jp">前菜</div>
+    <h2 class="section-title">Starters</h2>
+    <p class="section-sub">Pour commencer en beauté</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🍤</span></div>
+      <div class="card-body">
+        <div class="card-name">Popcorn Crevette <span class="card-price">6 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Bouchées de crevettes croustillantes, dorées à la perfection</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-special"><span class="food-icon">🔥</span></div>
+      <div class="card-body">
+        <div class="card-name">Mix Rock Fire <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Langouste, crevette, calamar — un trio flamboyant</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-crispy"><span class="food-icon">🥟</span></div>
+      <div class="card-body">
+        <div class="card-name">Nems Viande <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Rouleaux croustillants garnis de viande finement assaisonnée</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🥟</span></div>
+      <div class="card-body">
+        <div class="card-name">Nems Crevette <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Rouleaux croustillants aux crevettes</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-crispy"><span class="food-icon">🥟</span></div>
+      <div class="card-body">
+        <div class="card-name">Nems Poulet <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Rouleaux croustillants au poulet savoureux</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🥟</span></div>
+      <div class="card-body">
+        <div class="card-name">Gyoza Crevette <span class="card-price">6 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Raviolis japonais aux crevettes, grillés et dorés</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🥟</span></div>
+      <div class="card-body">
+        <div class="card-name">Gyoza Poulet <span class="card-price">5 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Raviolis japonais au poulet, grillés et dorés</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🍗</span></div>
+      <div class="card-body">
+        <div class="card-name">Lollipop Wings <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Ailes de poulet en sucettes, délicieusement panées</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-crispy"><span class="food-icon">🍗</span></div>
+      <div class="card-body">
+        <div class="card-name">Poulet Pané <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Morceaux de poulet panés, croustillants et tendres</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🔥</span></div>
+      <div class="card-body">
+        <div class="card-name">Chicken Rock Fire <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Poulet flambé avec une touche de piquant</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🦑</span></div>
+      <div class="card-body">
+        <div class="card-name">Calamar à l'Ail <span class="card-price">3 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Calamars sautés à l'ail, tendres et parfumés</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-sushi"><span class="food-icon">🍣</span></div>
+      <div class="card-body">
+        <div class="card-name">Maki Tempura <span class="card-price">6 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Riz sushi, algue, saumon, oignon vert, sauce, oignons grillés</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🌯</span></div>
+      <div class="card-body">
+        <div class="card-name">Japanese Roll Crevette <span class="card-price">5 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Galette de riz, crevette, laitue, avocat, chou rouge, carotte, mangue</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🌯</span></div>
+      <div class="card-body">
+        <div class="card-name">Japanese Roll Saumon <span class="card-price">6 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Galette de riz, saumon, laitue, avocat, chou rouge, carotte, mangue</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🦐</span></div>
+      <div class="card-body">
+        <div class="card-name">Gambas Tempura <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Grosses crevettes enrobées d'une pâte tempura légère et croustillante</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-crispy"><span class="food-icon">🦐</span></div>
+      <div class="card-body">
+        <div class="card-name">Gambas Panko <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Gambas panées à la chapelure panko, extra croustillantes</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-veggie"><span class="food-icon">🌿</span></div>
+      <div class="card-body">
+        <div class="card-name">Rouleau de Printemps <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Galette de riz, vermicelle, surimi, crevette, avocat, laitue, concombre</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-veggie"><span class="food-icon">🥬</span></div>
+      <div class="card-body">
+        <div class="card-name">Légume Tempura <span class="card-price">3 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Poivron, carotte, oignon, pomme de terre en tempura croustillante</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🌯</span></div>
+      <div class="card-body">
+        <div class="card-name">Wrap <span class="card-price">3 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Tortilla, poulet pané, avocat, laitue, cream cheese, mayonnaise épicée</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ SALADES & POKÉS ═══════════════ -->
+<section class="section fade-in" id="salades">
+  <div class="section-header">
+    <div class="section-jp">サラダ</div>
+    <h2 class="section-title">Salades & Pokés</h2>
+    <p class="section-sub">Fraîcheur et saveurs</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🥗</span></div>
+      <div class="card-body">
+        <div class="card-name">Salade Saumon Crispy <span class="card-price">9 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Saumon frais, tobiko, sauce légère et acidulée, crispy</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-veggie"><span class="food-icon">🥗</span></div>
+      <div class="card-body">
+        <div class="card-name">Salade de Chou <span class="card-price">3 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Chou, carotte, mayonnaise, sauce, huile de sésame, grain de sésame</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🦀</span></div>
+      <div class="card-body">
+        <div class="card-name">Salade Crazy Crab <span class="card-price">6 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, avocat, surimi, crispy, carotte, sauce</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🥗</span></div>
+      <div class="card-body">
+        <div class="card-name">Salade Meiji Saumon <span class="card-price">9 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, avocat, saumon, crispy, sauce</p>
+        <span class="card-tag">Signature</span>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🔥</span></div>
+      <div class="card-body">
+        <div class="card-name">Salade Meiji Tataki Saumon <span class="card-price">9 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, avocat, saumon tataki, sauce, grain de sésame</p>
+        <span class="card-tag">Signature</span>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🍱</span></div>
+      <div class="card-body">
+        <div class="card-name">Meiji Poké Saumon <span class="card-price">8 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, carotte, avocat, mangue, orange, chou violet, saumon, sauce</p>
+        <span class="card-tag">Signature</span>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-sushi"><span class="food-icon">🍱</span></div>
+      <div class="card-body">
+        <div class="card-name">Meiji Poké Bar <span class="card-price">6 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, carotte, avocat, mangue, orange, chou violet, bar, sauce</p>
+        <span class="card-tag">Signature</span>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-special"><span class="food-icon">🍱</span></div>
+      <div class="card-body">
+        <div class="card-name">Meiji Poké Mixe <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Iceberg, carotte, avocat, mangue, orange, chou violet, saumon, bar, sauce</p>
+        <span class="card-tag">Signature</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ TARTARES ═══════════════ -->
+<section class="section fade-in" id="tartares">
+  <div class="section-header">
+    <div class="section-jp">タルタル</div>
+    <h2 class="section-title">Tartares & Plus</h2>
+    <p class="section-sub">La noblesse du poisson cru</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="card-photo photo-tartare"><span class="food-icon">🐟</span></div>
+      <div class="card-body">
+        <div class="card-name">Tartare Saumon Avocat <span class="card-price">9 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Saumon frais, avocat, sauce maison</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-sushi"><span class="food-icon">🐟</span></div>
+      <div class="card-body">
+        <div class="card-name">Tartare Bar Avocat <span class="card-price">7 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Bar, avocat, sauce maison</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-special"><span class="food-icon">✨</span></div>
+      <div class="card-body">
+        <div class="card-name">Tartare Mix <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Saumon, bar, avocat, sauce — le meilleur des deux mondes</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🍊</span></div>
+      <div class="card-body">
+        <div class="card-name">Carpaccio Saumon <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Saumon, mangue, orange, sauce, oignon vert, grain de sésame</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🍋</span></div>
+      <div class="card-body">
+        <div class="card-name">Ceviche Mix <span class="card-price">7 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Surimi, crevettes, saumon, bar, sauce acidulée</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ SASHIMI ═══════════════ -->
+<section class="section fade-in" id="sashimi">
+  <div class="section-header">
+    <div class="section-jp">刺身</div>
+    <h2 class="section-title">Sashimi & Shirashi</h2>
+    <p class="section-sub">L'essence pure du poisson</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🍣</span></div>
+      <div class="card-body">
+        <div class="card-name">Sashimi Saumon <span class="card-price">8 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Tranches fines de saumon frais, nature ou tataki</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-sushi"><span class="food-icon">🍣</span></div>
+      <div class="card-body">
+        <div class="card-name">Sashimi Bar <span class="card-price">6 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Tranches fines de bar frais, nature ou tataki</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🍱</span></div>
+      <div class="card-body">
+        <div class="card-name">Shirashi Saumon <span class="card-price">9 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Riz sushi, saumon, avocat, shiitaké</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-sushi"><span class="food-icon">🍱</span></div>
+      <div class="card-body">
+        <div class="card-name">Shirashi Bar <span class="card-price">7 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Riz sushi, bar, avocat, shiitaké</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-special"><span class="food-icon">✨</span></div>
+      <div class="card-body">
+        <div class="card-name">Shirashi Saumon Bar <span class="card-price">9 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Riz sushi, saumon, bar, avocat, shiitaké — le duo royal</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ SOUPES ═══════════════ -->
+<section class="section fade-in" id="soupes">
+  <div class="section-header">
+    <div class="section-jp">スープ</div>
+    <h2 class="section-title">Soupes & Ramen</h2>
+    <p class="section-sub">Réconfort à chaque gorgée</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="card-photo photo-soup"><span class="food-icon">🍜</span></div>
+      <div class="card-body">
+        <div class="card-name">Seafood Ramen <span class="card-price">6 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Nouilles, crevettes, calamar, saumon, surimi</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-shrimp"><span class="food-icon">🍜</span></div>
+      <div class="card-body">
+        <div class="card-name">Tempura Udon Ramen <span class="card-price">5 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Nouilles udon, crevettes tempura</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🍜</span></div>
+      <div class="card-body">
+        <div class="card-name">Chicken Ramen <span class="card-price">5 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Nouilles, poulet pané, œuf</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-grill"><span class="food-icon">🍜</span></div>
+      <div class="card-body">
+        <div class="card-name">Beef Ramen <span class="card-price">6 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Nouilles, filet de bœuf tendre</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-soup"><span class="food-icon">🍲</span></div>
+      <div class="card-body">
+        <div class="card-name">Gomoko <span class="card-price">5 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Bouillon à l'œuf, crevettes, légumes</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-soup"><span class="food-icon">🍄</span></div>
+      <div class="card-body">
+        <div class="card-name">Mushroom Soup <span class="card-price">3 500 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Shiitaké, champignons de Paris, légumes, lait de coco</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-soup"><span class="food-icon">🫕</span></div>
+      <div class="card-body">
+        <div class="card-name">Miso Tofu <span class="card-price">4 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Pâte miso, tofu, oignons verts</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="card-photo photo-salmon"><span class="food-icon">🫕</span></div>
+      <div class="card-body">
+        <div class="card-name">Miso Saumon Champignon <span class="card-price">6 000 <span class="currency">FCFA</span></span></div>
+        <p class="card-desc">Pâte miso, saumon, shiitaké</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ NIGIRI ═══════════════ -->
+<section class="section fade-in" id="nigiri">
+  <div class="section-header">
+    <div class="section-jp">握り</div>
+    <h2 class="section-title">Nigiri</h2>
+    <p class="section-sub">x2 pièces — L'art du geste</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Saumon <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon frais ou tataki sur riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🥑</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Saumon Avocat <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, avocat, riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🧀</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Saumon Cheese <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, fromage, riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Bar <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Bar frais ou tataki sur riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🥑</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Avocat Cheese <span class="card-price">2 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Avocat, fromage, riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🦐</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Crevette <span class="card-price">3 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette sur riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🦐</span></div><div class="card-body"><div class="qty-tag">x2</div><div class="card-name">Nigiri Crevette Tempura <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura sur riz sushi</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ MAKI ═══════════════ -->
+<section class="section fade-in" id="maki">
+  <div class="section-header">
+    <div class="section-jp">巻き</div>
+    <h2 class="section-title">Maki</h2>
+    <p class="section-sub">x4 pièces — Tradition roulée</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Crevette <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, avocat, concombre, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Crevette Tempura <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura, avocat, concombre, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Saumon <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, avocat, concombre, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🧀</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Saumon Cheese <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, cheese, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Bar <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Bar, avocat, concombre, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🥑</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Veggie <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Avocat, concombre, riz sushi, algue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🦑</span></div><div class="card-body"><div class="qty-tag">x4</div><div class="card-name">Maki Calamar à l'Ail <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Calamar à l'ail, avocat, concombre, riz sushi, algue</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ CALIFORNIA ═══════════════ -->
+<section class="section fade-in" id="california">
+  <div class="section-header">
+    <div class="section-jp">カリフォルニア</div>
+    <h2 class="section-title">California & Snow Rolls</h2>
+    <p class="section-sub">x4 pièces — Fusion californienne</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Crevette <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, avocat, concombre, sésame</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Crevette Tempura <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura, avocat, concombre, sésame</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Saumon <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, avocat, concombre, sésame</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🧀</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Saumon Cheese <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, cheese, riz sushi, sésame</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🍣</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Bar <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Bar, avocat, concombre, sésame</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🥑</span></div><div class="card-body"><div class="qty-tag">California x4</div><div class="card-name">California Veggie <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Avocat, concombre, sésame</p></div></div>
+
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">❄️</span></div><div class="card-body"><div class="qty-tag">Snow Roll x4</div><div class="card-name">Snow Roll Bar <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Bar, avocat, concombre, riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">❄️</span></div><div class="card-body"><div class="qty-tag">Snow Roll x4</div><div class="card-name">Snow Roll Crevette <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, avocat, concombre, riz sushi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">❄️</span></div><div class="card-body"><div class="qty-tag">Snow Roll x4</div><div class="card-name">Snow Roll Saumon <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, concombre, avocat, riz sushi</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ SPRING ROLLS ═══════════════ -->
+<section class="section fade-in" id="spring">
+  <div class="section-header">
+    <div class="section-jp">春巻き</div>
+    <h2 class="section-title">Spring & Soja Rolls</h2>
+    <p class="section-sub">Légèreté et finesse</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🌸</span></div><div class="card-body"><div class="qty-tag">Spring x4</div><div class="card-name">Spring Végétarien <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz, laitue, avocat, cheese</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🌸</span></div><div class="card-body"><div class="qty-tag">Spring x4</div><div class="card-name">Spring Saumon <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz, saumon, laitue, avocat, cheese</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🌸</span></div><div class="card-body"><div class="qty-tag">Spring x4</div><div class="card-name">Spring Surimi <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz, laitue, surimi, avocat, cheese</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🌸</span></div><div class="card-body"><div class="qty-tag">Spring x4</div><div class="card-name">Spring Bar <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz, bar, laitue, avocat, cheese</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-special"><span class="food-icon">🌸</span></div><div class="card-body"><div class="qty-tag">Spring x4</div><div class="card-name">Spring Seb <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz, avocat, surimi, saumon, cheese, mangue</p></div></div>
+
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🫘</span></div><div class="card-body"><div class="qty-tag">Soja Roll x6</div><div class="card-name">Soja Bar <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Bar, concombre, avocat, cheese, riz sushi, feuille de soja</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🫘</span></div><div class="card-body"><div class="qty-tag">Soja Roll x6</div><div class="card-name">Soja Saumon <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, concombre, avocat, cheese, riz sushi, feuille de soja</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🫘</span></div><div class="card-body"><div class="qty-tag">Soja Roll x6</div><div class="card-name">Soja Saumon Cheese <span class="card-price">6 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, cheese, riz sushi, feuille de soja</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ CRISPY & CRUNCHY ═══════════════ -->
+<section class="section fade-in" id="crispy">
+  <div class="section-header">
+    <div class="section-jp">クリスピー</div>
+    <h2 class="section-title">Crispy & Crunchy</h2>
+    <p class="section-sub">x4 pièces — La croustillance parfaite</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">✨</span></div><div class="card-body"><div class="qty-tag">Imperial x4</div><div class="card-name">Imperial Spicy Saumon <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, avocat, cheese, tartare de saumon</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">✨</span></div><div class="card-body"><div class="qty-tag">Imperial x4</div><div class="card-name">Imperial Crevette Tempura <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, avocat, crevette tempura, tartare surimi</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">✨</span></div><div class="card-body"><div class="qty-tag">Imperial x4</div><div class="card-name">Imperial Spicy Bar <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, avocat, cheese, tartare de bar</p></div></div>
+
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🔥</span></div><div class="card-body"><div class="qty-tag">Crispy Roll x4</div><div class="card-name">Crispy Saumon <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, avocat, cheese, saumon</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🔥</span></div><div class="card-body"><div class="qty-tag">Crispy Roll x4</div><div class="card-name">Crispy Crevette Tempura <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, cheese, concombre, crevette tempura</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🔥</span></div><div class="card-body"><div class="qty-tag">Crispy Roll x4</div><div class="card-name">Crispy Végétarien <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz crispy, algue, avocat, concombre, cheese</p></div></div>
+
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">💥</span></div><div class="card-body"><div class="qty-tag">Crunchy Roll x4</div><div class="card-name">Crunchy Saumon <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi frit, algue, cheese, saumon</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">💥</span></div><div class="card-body"><div class="qty-tag">Crunchy Roll x4</div><div class="card-name">Crunchy Crevette Tempura <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi frit, algue, cheese, concombre, crevette tempura</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">💥</span></div><div class="card-body"><div class="qty-tag">Crunchy Roll x4</div><div class="card-name">Crunchy Végétarien <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi frit, algue, avocat, cheese</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ ORIGINAUX ═══════════════ -->
+<section class="section fade-in" id="originaux">
+  <div class="section-header">
+    <div class="section-jp">オリジナル</div>
+    <h2 class="section-title">Originaux</h2>
+    <p class="section-sub">x4 pièces — Créations uniques du chef</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-special"><span class="food-icon">🎨</span></div><div class="card-body"><div class="card-name">Meiji Mix Balls <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, surimi, saumon, crevette, bar</p><span class="card-tag">Signature</span></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🎨</span></div><div class="card-body"><div class="card-name">Original Salmon Roll <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, cheese, avocat, recouvert de saumon</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🎨</span></div><div class="card-body"><div class="card-name">Original Kyoto <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz frit, algue, bœuf, poivron, carotte, concombre</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🎨</span></div><div class="card-body"><div class="card-name">Original Tobiko Top <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, crevette tempura, cheese, avocat, tobiko</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🥑</span></div><div class="card-body"><div class="card-name">Avocat Vegie <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, carotte, concombre, cheese, recouvert d'avocat</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-special"><span class="food-icon">🥭</span></div><div class="card-body"><div class="card-name">Mango Roll <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, avocat, cheese, concombre, recouvert de mangue</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🥑</span></div><div class="card-body"><div class="card-name">Original Avocado <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, saumon, cheese, recouvert d'avocat</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-special"><span class="food-icon">🏯</span></div><div class="card-body"><div class="card-name">Original Fujima <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, tartare de surimi, recouvert de bar, saumon, crevette</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🧀</span></div><div class="card-body"><div class="card-name">Original Cheddar Top <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, algue, poulet tempura, poivron, cheddar, sauce teriyaki</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🔥</span></div><div class="card-body"><div class="card-name">Koxy Crevette Tempura <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz frit, algue, avocat, cheese, crevette, enrobé de tempura</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🔥</span></div><div class="card-body"><div class="card-name">Koxy Saumon <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz frit, algue, saumon, avocat, cheese, sauce spéciale</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🔥</span></div><div class="card-body"><div class="card-name">Koxy Chicken Tempura <span class="card-price">5 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz frit, algue, poulet pané, avocat, cheese</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ SPÉCIAUX ═══════════════ -->
+<section class="section fade-in" id="speciaux">
+  <div class="section-header">
+    <div class="section-jp">特別</div>
+    <h2 class="section-title">Spéciaux</h2>
+    <p class="section-sub">x8 pièces — Les créations d'exception</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="featured-grid">
+    <div class="featured-card"><div class="featured-badge">Chef's Choice</div><div class="card-photo photo-special"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Tokyo <span class="card-price">10 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, surimi, cheese, frit dans le tempura, mayonnaise, tobiko au dessus</p></div></div>
+    <div class="featured-card"><div class="featured-badge">Chef's Choice</div><div class="card-photo photo-crispy"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Noah <span class="card-price">10 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura, surimi, avocat, sauce spéciale, crispy au dessus</p></div></div>
+    <div class="featured-card"><div class="featured-badge">Chef's Choice</div><div class="card-photo photo-salmon"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Cheezy Baby <span class="card-price">10 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Surimi, crevette, avocat, enrobé de cheddar, tartare saumon tataki</p></div></div>
+    <div class="featured-card"><div class="featured-badge">Chef's Choice</div><div class="card-photo photo-special"><span class="food-icon">🐛</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Caterpillar <span class="card-price">10 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura, surimi, avocat, frit tempura, mayonnaise, tobiko</p></div></div>
+    <div class="featured-card"><div class="featured-badge">★ Bestseller</div><div class="card-photo photo-salmon"><span class="food-icon">👑</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Salmon Nogaya <span class="card-price">11 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, surimi, cheese, avocat, enrobé de saumon, mayo, oignons verts</p></div></div>
+    <div class="featured-card"><div class="featured-badge">★ Premium</div><div class="card-photo photo-salmon"><span class="food-icon">👑</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Meiji Special Saumon <span class="card-price">11 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Avocat, cheese, enrobé de tartare de saumon, sauce spéciale</p><span class="card-tag">Signature Meiji</span></div></div>
+    <div class="featured-card"><div class="featured-badge">★ Premium</div><div class="card-photo photo-special"><span class="food-icon">🔥</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Meiji Fusion Spicy <span class="card-price">11 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, avocat, enrobé de saumon, tartare mangue/orange, tobiko</p><span class="card-tag">Signature Meiji</span></div></div>
+    <div class="featured-card"><div class="featured-badge">Chef's Choice</div><div class="card-photo photo-sushi"><span class="food-icon">🌈</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Rainbow <span class="card-price">10 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, surimi, avocat, enrobé de saumon et bar grillés</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-shrimp"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Naruto <span class="card-price">10 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Galette de riz frit, crevette tempura, cheese, tartare surimi</p></div></div>
+    <div class="featured-card"><div class="featured-badge">★ Premium</div><div class="card-photo photo-shrimp"><span class="food-icon">🦞</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Meiji Langouste <span class="card-price">10 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Langouste, avocat, cheese, enrobé de surimi, tartare de langouste</p><span class="card-tag">Signature Meiji</span></div></div>
+    <div class="featured-card"><div class="card-photo photo-special"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Special Tataki Mix <span class="card-price">11 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, bar, avocat, saumon et bar grillés, oignons frits</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-salmon"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Hot Philadelphia <span class="card-price">11 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, surimi, cheese, frit tempura, avocat, crispy, sauce spéciale</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-grill"><span class="food-icon">🌮</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Mexico <span class="card-price">8 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet tempura, avocat, poivron, cheddar, oignons frits</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-sushi"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Special Bar <span class="card-price">9 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Avocat, cheese, enrobé de tartare de bar, sauce spéciale</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-grill"><span class="food-icon">🍗</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Special Mila <span class="card-price">8 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet tempura, avocat, tartare de poulet, sauce spéciale</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-crispy"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Nigata <span class="card-price">10 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette tempura, avocat, tartare de crevette, crispy</p></div></div>
+    <div class="featured-card"><div class="card-photo photo-shrimp"><span class="food-icon">⭐</span></div><div class="card-body"><div class="qty-tag">x8 pièces</div><div class="card-name">Oedo <span class="card-price">10 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Crevette, surimi, avocat, enrobé d'avocat et crevette, tartare crevette</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ PLATS CHAUDS ═══════════════ -->
+<section class="section fade-in" id="plats">
+  <div class="section-header">
+    <div class="section-jp">料理</div>
+    <h2 class="section-title">Plats Chauds</h2>
+    <p class="section-sub">La chaleur du teppan</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍝</span></div><div class="card-body"><div class="card-name">Yakisoba Bœuf <span class="card-price">7 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Nouilles sautées, fines lamelles de bœuf, légumes croquants, sauce yakisoba</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍝</span></div><div class="card-body"><div class="card-name">Yakisoba Poulet <span class="card-price">6 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Nouilles sautées, blanc de poulet, légumes croquants, sauce yakisoba</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🍝</span></div><div class="card-body"><div class="card-name">Yakisoba Crevette <span class="card-price">8 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Nouilles sautées, crevettes, légumes croquants, sauce yakisoba</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🥩</span></div><div class="card-body"><div class="card-name">Bœuf Gingembre <span class="card-price">7 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Émincé de filet de bœuf, gingembre, champignons noirs, riz blanc</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍛</span></div><div class="card-body"><div class="card-name">Poulet Curry <span class="card-price">7 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet dans un curry épicé, champignons, légumes, riz blanc</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🥜</span></div><div class="card-body"><div class="card-name">Poulet Cajou <span class="card-price">7 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet croustillant, noix de cajou grillées, sauce soja, légumes, riz</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍗</span></div><div class="card-body"><div class="card-name">Poulet Teriyaki <span class="card-price">7 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet grillé glacé sauce teriyaki sucrée-salée, champignons, riz</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-crispy"><span class="food-icon">🍳</span></div><div class="card-body"><div class="card-name">Kattsudon Poulet <span class="card-price">6 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Poulet pané frit dans l'omelette, riz, sauce katsudon, oignons verts</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🥩</span></div><div class="card-body"><div class="card-name">Meiji Don Bori <span class="card-price">8 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Filet de bœuf, oignon, shiitaké, œuf poché, riz blanc</p><span class="card-tag">Signature</span></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🦑</span></div><div class="card-body"><div class="card-name">Ika Teppan <span class="card-price">7 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Calamars, légumes, shiitaké, riz cantonnais</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🦐</span></div><div class="card-body"><div class="card-name">Ebi Teppan <span class="card-price">9 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Gambas gratinées au fromage, légumes, shiitaké, riz cantonnais</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-salmon"><span class="food-icon">🐟</span></div><div class="card-body"><div class="card-name">Saumon Teppan <span class="card-price">12 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Pavé de saumon, légumes, shiitaké, riz cantonnais</p><span class="card-tag">Premium</span></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🥩</span></div><div class="card-body"><div class="card-name">Meiji Bœuf Teppan <span class="card-price">8 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Filet de bœuf, légumes, shiitaké, riz cantonnais</p><span class="card-tag">Signature</span></div></div>
+    <div class="menu-card"><div class="card-photo photo-special"><span class="food-icon">🌊</span></div><div class="card-body"><div class="card-name">Seafood Teppan <span class="card-price">9 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Saumon, bar, crevette, calamar, légumes, shiitaké, riz cantonnais</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-shrimp"><span class="food-icon">🦞</span></div><div class="card-body"><div class="card-name">Lobster Teppan <span class="card-price">11 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Langouste, lait de coco, légumes, shiitaké, riz cantonnais</p><span class="card-tag">Premium</span></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🥩</span></div><div class="card-body"><div class="card-name">Beef Teppan <span class="card-price">7 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Filet de bœuf, légumes, riz blanc</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ YAKITORI & ACCOMPAGNEMENTS ═══════════════ -->
+<section class="section fade-in" id="yakitori" style="padding-bottom:0">
+  <div class="section-header">
+    <div class="section-jp">焼き鳥</div>
+    <h2 class="section-title">Yakitori & Accompagnements</h2>
+    <p class="section-sub">Les essentiels</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-yakitori"><span class="food-icon">🍢</span></div><div class="card-body"><div class="card-name">Yakitori Bœuf Fromage <span class="card-price">4 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Brochette de bœuf au fromage, grillée au charbon</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-yakitori"><span class="food-icon">🍢</span></div><div class="card-body"><div class="card-name">Yakitori Poulet <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Brochette de poulet grillée, sauce yakitori</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-soup"><span class="food-icon">🍚</span></div><div class="card-body"><div class="card-name">Riz Blanc <span class="card-price">2 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz nature japonais</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍚</span></div><div class="card-body"><div class="card-name">Riz Cantonnais <span class="card-price">2 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sauté aux légumes et œuf</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-sushi"><span class="food-icon">🍚</span></div><div class="card-body"><div class="card-name">Riz Vinaigré <span class="card-price">3 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Riz sushi, délicatement vinaigré</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-grill"><span class="food-icon">🍝</span></div><div class="card-body"><div class="card-name">Nouilles Sautées <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Nouilles sautées aux légumes</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-veggie"><span class="food-icon">🥬</span></div><div class="card-body"><div class="card-name">Légumes Sautés <span class="card-price">3 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Assortiment de légumes sautés au wok</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ DESSERTS ═══════════════ -->
+<section class="section fade-in" id="desserts">
+  <div class="section-header">
+    <div class="section-jp">デザート</div>
+    <h2 class="section-title">Desserts</h2>
+    <p class="section-sub">La touche finale</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="card-photo photo-dessert"><span class="food-icon">🍰</span></div><div class="card-body"><div class="card-name">Japanese Cheese Cake <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Gâteau au fromage japonais, léger et aérien comme un nuage</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-dessert"><span class="food-icon">🍫</span></div><div class="card-body"><div class="card-name">Fondant au Chocolat <span class="card-price">5 000 <span class="currency">FCFA</span></span></div><p class="card-desc">Cœur coulant au chocolat noir, moelleux à souhait</p></div></div>
+    <div class="menu-card"><div class="card-photo photo-dessert"><span class="food-icon">🍦</span></div><div class="card-body"><div class="card-name">Tempura Ice Cream <span class="card-price">4 500 <span class="currency">FCFA</span></span></div><p class="card-desc">Glace enrobée de tempura croustillante, un contraste unique</p></div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-logo">MEIJI</div>
+  <div class="foot-sub">— sushi & grill —</div>
+  <p>
+    Toutes nos créations sont réalisées sur place<br>
+    à partir d'ingrédients frais et de qualité.
+  </p>
+  <p class="foot-note">— Bon Appétit ! —</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Stagger card animations
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.menu-card, .featured-card');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = `all 0.5s ease ${index * 0.05}s`;
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 50);
+      });
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.menu-grid, .featured-grid').forEach(el => cardObserver.observe(el));
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 120;
+    if (scrollY >= top) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
